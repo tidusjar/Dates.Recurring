@@ -32,17 +32,17 @@ namespace Dates.Recurring.Type
         {
             var next = Starting;
 
-            if (after.Date < Starting.Date)
+            if (after <= Starting)
             {
                 after = Starting - 1.Days();
             }
 
-            while (next.Date <= after.Date || !DayOfWeekMatched(next.DayOfWeek))
+            while (next <= after || !DayOfWeekMatched(next.DayOfWeek))
             {
                 next = GetNextCandidate(next);
             }
 
-            if (Ending.HasValue && next.Date > Ending.Value.Date)
+            if (Ending.HasValue && next > Ending.Value)
             {
                 return null;
             }

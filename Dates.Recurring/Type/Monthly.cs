@@ -48,14 +48,14 @@ namespace Dates.Recurring.Type
         {
             var next = Starting;
 
-            if (after.Date <= Starting.Date)
-            {
+            if (after <= Starting)
+            { 
                 after = Starting - 1.Days();
             }
 
             var targetDay = OrdinalTargetDay(next.Month, next.Year);
 
-            while (next.Date < after.Date || !DayOfMonthMatched(targetDay, next))
+            while (next < after || !DayOfMonthMatched(targetDay, next))
             {
                 var candidate = GetNextOrdinalDayCandidate(next, targetDay);
 

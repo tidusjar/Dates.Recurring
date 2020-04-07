@@ -112,5 +112,25 @@ namespace Dates.Recurring.Tests
             Assert.Equal(new DateTime(2015, 1, 14), daily.Previous(new DateTime(2015, 1, 15)));
         }
 
+        [Fact]
+        public void Daily_EveryDay_WithTime()
+        {
+            // Arrange.
+            IRecurring daily = Recurs
+                .Starting(new DateTime(2020, 04, 06, 10, 00, 00))
+                .Every(1)
+                .Days()
+                .Ending(new DateTime(2021, 1, 15))
+                .Build();
+
+            // Act.
+
+            // Assert.
+            Assert.Equal(new DateTime(2020, 04, 06, 10, 00, 00), daily.Next(new DateTime(2020, 04, 06, 09, 00, 00))); // Before start
+            Assert.Equal(new DateTime(2020, 04, 07, 10, 00, 00), daily.Next(new DateTime(2020, 04, 06, 10, 00, 00)));  // On Start
+            Assert.Equal(new DateTime(2020, 04, 07, 10, 00, 00), daily.Next(new DateTime(2020, 04, 06, 11, 00, 00)));  // After Start
+
+        }
+
     }
 }

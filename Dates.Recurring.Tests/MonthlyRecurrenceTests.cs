@@ -225,6 +225,24 @@ namespace Dates.Recurring.Tests
             // Assert.
             Assert.Equal(new DateTime(2019,05,27,13,00,00), monthly.Next(new DateTime(2019,05,27,09,00,00)));
         }
+
+        [Fact]
+        public void Monthly_EveryFirstMonth_Ordinal_SameDay()
+        {
+            // Arrange.
+            IRecurring monthly = Recurs
+                .Starting(new DateTime(2020,04,06,13,00,00)) // Monday
+                .Every(1)
+                .Months()
+                .OnOrdinalWeek(Ordinal.FIRST)
+                .OnDay(DayOfWeek.Monday)
+                .Build();
+
+            // Act.
+
+            // Assert.
+            Assert.Equal(new DateTime(2020,05,04,13,00,00), monthly.Next(new DateTime(2020,04,06,14,00,00)));
+        }
     }
 }
 

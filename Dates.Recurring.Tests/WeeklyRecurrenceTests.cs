@@ -193,5 +193,27 @@ namespace Dates.Recurring.Tests
 
             Assert.Null(weekly.Previous(new DateTime(2018, 2, 25)));
         }
+
+        [Fact]
+        public void Weekly_EveryWeek_SameTimeAsDateTime()
+        {
+            // Arrange.
+            DateTime startDate = new DateTime(2020, 04, 06,10,00,00);
+
+            IRecurring weekly = Recurs
+                .Starting(startDate)
+                .Every(1)
+                .Weeks()
+                .OnDay(DayOfWeek.Monday)
+                .Ending(new DateTime(2021, 2, 19))
+                .Build();
+
+            // Act.
+
+            // Assert.
+            Assert.Equal(new DateTime(2020, 04, 13,10,00,00), weekly.Next(new DateTime(2020, 04, 06,11,00,00)));
+            Assert.Equal(new DateTime(2020, 04, 20,10,00,00), weekly.Next(new DateTime(2020, 04, 13,10,00,00)));
+            Assert.Equal(new DateTime(2020, 04, 20,10,00,00), weekly.Next(new DateTime(2020, 04, 20,09,00,00)));
+        }
     }
 }

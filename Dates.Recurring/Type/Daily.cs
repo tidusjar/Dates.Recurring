@@ -16,7 +16,7 @@ namespace Dates.Recurring.Type
         {
             var next = Starting;
 
-            if (after.Date < Starting.Date)
+            if (after < Starting)
             {
                 after = Starting - 1.Days();
             }
@@ -26,7 +26,7 @@ namespace Dates.Recurring.Type
                 next = MoveXDaysForward(next);
             }
 
-            if (Ending.HasValue && next.Date > Ending.Value.Date)
+            if (Ending.HasValue && next > Ending.Value)
             {
                 return null;
             }
